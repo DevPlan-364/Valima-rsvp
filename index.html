@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Walima Invitation</title>
+  <!-- Google Fonts for enhanced typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Animate.css for simple CSS animations -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body, html {
+      font-family: 'Roboto', sans-serif;
+      height: 100%;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      background: #fdf6f0; /* A light background for contrast with the invitation box */
+    }
+    
+    /* Animated Gradient Background for the Hero */
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 100vh;
+      background: linear-gradient(45deg, #ff6b6b, #f7d794, #1dd1a1, #54a0ff);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+    }
+    
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 1;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      animation: fadeIn 2s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+      letter-spacing: 2px;
+    }
+    
+    .hero p {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+    }
+    
+    .hero .names {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #ffd700;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+      margin-bottom: 2rem;
+    }
+    
+    .wave-mobile {
+        display: none; /* Hide by default */
+    }
+
+    .scroll-down {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+    
+    .scroll-down:hover {
+      transform: translateY(10px);
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    /* Invitation Box Container */
+    .invitation-box {
+      background: rgba(255, 255, 255, 0.95);
+      border: 3px solid #a67c52;
+      border-radius: 15px;
+      padding: 2rem;
+      margin: -80px auto 2rem auto;
+      max-width: 800px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Details Section inside the Invitation Box */
+    #details {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    #details h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    #details p {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+    
+    /* Countdown Section */
+    #countdown {
+      background: #f4f4f4;
+      padding: 2rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+    }
+    
+    #countdown h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    #timer {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+    
+    /* RSVP Section */
+    #rsvp {
+    text-align: center;
+    margin-top: 2rem;
+    }
+
+    #rsvp h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    }
+
+    #rsvp form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* left-align labels */
+    }
+
+    #rsvp label {
+    margin: 0.5rem 0 0.2rem 0;
+    font-weight: 500;
+    }
+
+    #rsvp input,
+    #rsvp textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    }
+
+    .radio-group {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    }
+
+    .radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin: 0;
+    }
+
+    .radio-container {
+    display: inline-block;
+    position: relative;
+    padding-left: 30px;
+    margin-right: 2rem; /* space between Yes and No */
+    cursor: pointer;
+    font-size: 1rem;
+    user-select: none; /* prevent text selection when clicking */
+    }
+
+    /* Hide the native radio input */
+    .radio-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    }
+
+    /* The custom circle (checkmark) */
+    .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+    }
+
+    /* Hover effect */
+    .radio-container:hover input ~ .checkmark {
+    background-color: #ccc;
+    }
+
+    /* When the radio is checked, change the circle’s background color */
+    .radio-container input:checked ~ .checkmark {
+    background-color: #a67c52;
+    }
+
+    /* Create the inner dot */
+    .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    top: 5px;  /* center dot vertically */
+    left: 5px; /* center dot horizontally */
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #fff;
+    }
+
+    /* Show the dot when checked */     
+    .radio-container input:checked ~ .checkmark:after {
+    display: block;
+    }
+
+
+
+    #rsvp button {
+    align-self: center; /* center the button horizontally */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background: #a67c52;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    }
+
+    #rsvp button:hover {
+    background: #8a5b3a;
+    }
+
+    
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #333;
+      color: #fff;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 3rem;
+      }
+      .hero p {
+        font-size: 1.2rem;
+      }
+      .hero .names {
+        font-size: 2rem;
+      }
+
+      .wave-desktop {
+        display: none; /* Hide the desktop wave */
+        }
+
+      .wave-mobile {
+            display: block; /* Show the mobile wave */
+        }
+
+      .invitation-box {
+        margin: -60px 1rem 2rem 1rem;
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero Section -->
+  <div class="hero">
+    <div class="hero-content">
+      <h1 class="animate__animated animate__fadeInDown">Walima Invitation</h1>
+      <p class="animate__animated animate__fadeInUp">Join us in celebrating a blessed union</p>
+      <p class="names animate__animated animate__fadeInUp">Nawfal Sayed &amp; Safa Mansouri</p>
+      <div class="scroll-down" tabindex="0" onclick="document.querySelector('.invitation-box').scrollIntoView({ behavior: 'smooth' });">
+        &#8595;
+      </div>
+    </div>
+  </div>
+  
+  <!-- Wave Divider -->
+  <div class="wave-divider">
+    <svg class="wave-desktop" 
+        viewBox="0 0 1240 120"
+        width="100%"
+        height="auto">
+    <!-- Desktop wave path -->
+    </svg>
+
+    <!-- Mobile Wave -->
+    <svg class="wave-mobile" 
+         viewBox="0 0 768 200"
+         width="100%"
+         height="auto">
+    <!-- Mobile wave path (taller or different shape) -->
+    </svg>
+  </div>
+
+  
+
+  <!-- Invitation Box: Wraps Details, Countdown, and RSVP -->
+  <div class="invitation-box">
+    <!-- Details Section -->
+    <section id="details">
+      <h2>Invitation Details</h2>
+      <p>Mr. Naveed Sayed Mohamed and Mrs. Sabina Abdul Razak invite you to the Walima ceremony of <span style="font-weight: bold; color: #a67c52;">Nawfal Sayed</span> and <span style="font-weight: bold; color: #a67c52;">Safa Mansouri</span>.</p>
+      <p>We look forward to celebrating this auspicious occasion with you. May the blessings of Allah be upon us all.</p>
+    </section>
+    
+    <!-- Countdown Section -->
+    <section id="countdown">
+      <h2>Countdown to the Walima</h2>
+      <div id="timer">Loading...</div>
+    </section>
+    
+    <!-- RSVP Section -->
+    <section id="rsvp">
+        <h2>RSVP</h2>
+        <form id="rsvpForm">
+          <!-- Name -->
+          <label for="name">Your Name <span style="color: red;">*</span></label>
+          <input type="text" id="name" name="name" placeholder="e.g. Nawfal Sayed" required>
+          
+          <!-- Number of Attendees -->
+          <label for="attendees">Number of Attendees <span style="color: red;">*</span></label>
+          <input type="number" id="attendees" name="attendees" placeholder="e.g. 2" min="0" max="20" required>
+          
+          <!-- Attendance Confirmation -->
+          <!-- HTML -->
+            <p>Will you be attending? <span style="color: red;">*</span></p>
+            <label class="radio-container">Yes
+            <input type="radio" name="attending" value="Yes" required>
+            <span class="checkmark"></span>
+            </label>
+            <label class="radio-container">No
+            <input type="radio" name="attending" value="No" required>
+            <span class="checkmark"></span>
+            </label>
+          
+          <!-- Optional Message -->
+          <label for="message">Comments</label>
+          <textarea id="message" name="message" rows="4" placeholder="Let us know any special requirements (Optional)."></textarea>
+          
+          <!-- Submit Button -->
+          <button type="submit">Submit RSVP</button>
+        </form>
+      </section>
+      
+  </div>
+  
+  <footer>
+    &copy; 2025 Zaid. All rights reserved.
+  </footer>
+  
+  <script>
+    // Countdown Timer
+    const countdownDate = new Date("2025-05-04T18:30:00").getTime();
+    const timerElement = document.getElementById("timer");
+  
+    const countdownFunction = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = countdownDate - now;
+  
+      if (distance < 0) {
+        clearInterval(countdownFunction);
+        timerElement.innerHTML = "The Walima has begun!";
+        return;
+      }
+  
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  
+      timerElement.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s";
+    }, 1000);
+    
+    // RSVP Form Submission
+    const rsvpForm = document.getElementById("rsvpForm");
+    rsvpForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Thank you for your RSVP!");
+      rsvpForm.reset();
+    });
+  </script>
+</body>
+</html>
