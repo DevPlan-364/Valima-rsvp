@@ -424,12 +424,44 @@
     }, 1000);
     
     // RSVP Form Submission
-    const rsvpForm = document.getElementById("rsvpForm");
-    rsvpForm.addEventListener("submit", function(e) {
+
+    const rsvpForm = document.getElementById('rsvpForm');
+    rsvpForm.addEventListener('submit', function(e) {
       e.preventDefault();
-      alert("Thank you for your RSVP!");
-      rsvpForm.reset();
+      
+      // Gather form data into an object
+      const data = {
+        name: document.getElementById('name').value,
+        attendees: document.getElementById('attendees').value,
+        attending: document.querySelector('input[name="attending"]:checked').value,
+        message: document.getElementById('message').value
+      };
+      
+      // Send the data as JSON to the Apps Script web app
+      fetch('https://script.google.com/macros/s/AKfycbzwIaHcFmgxCpV_sIFJmkNuQe_1NR2PFKjURchMfiaNajHNNt34r051e5M6xzOX4ie2qQ/exec', { // Replace with your Web App URL
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(resp => {
+        if (resp.result === "success") {
+          alert('RSVP submitted successfully!');
+          rsvpForm.reset();
+        } else {
+          alert('Error: ' + resp.error);
+          console.error(resp.error);
+        }
+      })
+      .catch(error => {
+        alert('Submission failed: ' + error);
+        console.error(error);
+      });
     });
   </script>
 </body>
 </html>
+
+
